@@ -3,6 +3,7 @@ from flask import Flask
 from App.routes.auth_routes import auth_bp
 from App.config import Config
 from App.db import init_db
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
