@@ -14,11 +14,11 @@
             <div class="title login">Login Form</div>
             <div class="title signup">Signup Form</div>
         </div>
-        <!-- Check -->
-        <div>{{request,stat}}</div>
+        {# <!-- Check -->
+         <div>{{request,stat}}</div>
         {% for field in register %}
         <p>{{ field.label.text }}: {{ field.errors }}</p>
-        {% endfor %}
+        {% endfor %} #} 
 
         <div class="form-container">
             <div class="slide-controls">
@@ -29,16 +29,26 @@
                 <div class="slider-tab"></div>
                 
             </div>
+            <!-- {% with messages = get_flashed_messages(with_categories=true) %} -->
+            {% if messages %}
+                <!-- <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul> -->
+                {% for category, message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+
+            {% endif %}
+            {% endwith %}
             <div class="form-inner">
                 
                 <form action="{{ url_for('auth_bp.login') }}" method="post" class="login">
-                    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
-        {% for category, message in messages %}
-            {% if category == 'login_error' %}
-                <div class="alert alert-danger">{{ message }}</div>
-            {% endif %}
-        {% endfor %}
-        {% endwith %} -->
+
                     {{ login.hidden_tag() }}
                     <div class="field">
                         {{ login.username.label }}
@@ -48,7 +58,7 @@
                             <span class="text-danger">
                                 {{" | ".join(login.username.errors)}}
                             </span>
-                            {% endif %}
+                            {% endif %} 
 
                     </div>
                     <div class="field">

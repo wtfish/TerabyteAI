@@ -28,7 +28,7 @@ def login():
                 flash('Invalid username or password.', 'danger')
 
         # Handle Register Form Submission
-        if register_form.validate_on_submit()  :
+        if 'register-submit' in request.form and register_form.validate_on_submit()  :
             username = register_form.username.data
             email = register_form.email.data
             password = register_form.password.data
