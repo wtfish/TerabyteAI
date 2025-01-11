@@ -14,6 +14,11 @@
             <div class="title login">Login Form</div>
             <div class="title signup">Signup Form</div>
         </div>
+        <!-- Check -->
+        <div>{{request,stat}}</div>
+        {% for field in register %}
+        <p>{{ field.label.text }}: {{ field.errors }}</p>
+        {% endfor %}
 
         <div class="form-container">
             <div class="slide-controls">
@@ -27,25 +32,37 @@
             <div class="form-inner">
                 
                 <form action="{{ url_for('auth_bp.login') }}" method="post" class="login">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    <!-- {% with messages = get_flashed_messages(with_categories=true) %}
         {% for category, message in messages %}
             {% if category == 'login_error' %}
                 <div class="alert alert-danger">{{ message }}</div>
             {% endif %}
         {% endfor %}
-        {% endwith %}
-                    {{ form.hidden_tag() }}
+        {% endwith %} -->
+                    {{ login.hidden_tag() }}
                     <div class="field">
-                        {{ form.username.label }}
-                        {{ form.username(class="form-control", placeholder="Username") }}
+                        {{ login.username.label }}
+                        {{ login.username(class="form-control", placeholder="Username") }}
+                            {% if login.username.errors %}
+                            <div></div>
+                            <span class="text-danger">
+                                {{" | ".join(login.username.errors)}}
+                            </span>
+                            {% endif %}
+
                     </div>
                     <div class="field">
-                        {{ form.password.label }}
-                        {{ form.password(class="form-control", placeholder="Password") }}
+                        {{ login.password.label }}
+                        {{ login.password(class="form-control", placeholder="Password") }}
+                        {% if login.password.errors %}
+                        <span class="text-danger">
+                            {{" | ".join(login.username.errors)}}
+                        </span>
+                        {% endif %}
                     </div>
                     <div class="pass-link"><a href="#">Forgot password?</a></div>
                     <div class="field btn">
-                        {{ form.submit(class="btn btn-primary") }}
+                        {{ login.submit(class="btn btn-primary") }}
                     </div>
                     <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
                 </form>
@@ -53,20 +70,40 @@
                 <form action="{{ url_for('auth_bp.login') }}" method="post" class="signup">
                     {{ register.hidden_tag() }}
                     <div class="field">
-                        {{ register.username.label }}
+                        {{ register.username.label}}
                         {{ register.username(class="form-control", placeholder="Username") }}
+                        {% if register.username.errors %}
+                        <span class="text-danger">
+                            {{ " | ".join(register.username.errors) }}
+                        </span>
+                        {% endif %}
                     </div>
                     <div class="field">
                         {{ register.email.label }}
                         {{ register.email(class="form-control", placeholder="Email") }}
+                        {% if register.email.errors %}
+                        <span class="text-danger">
+                            {{ " | ".join(register.email.errors) }}
+                        </span>
+                        {% endif %}
                     </div>
                     <div class="field">
                         {{ register.password.label }}
                         {{ register.password(class="form-control", placeholder="Password") }}
+                        {% if register.password.errors %}
+                        <span class="text-danger">
+                            {{ " | ".join(register.password.errors) }}
+                        </span>
+                        {% endif %}
                     </div>
                     <div class="field">
                         {{ register.confirm_password.label }}
                         {{ register.confirm_password(class="form-control", placeholder="Confirm Password") }}
+                        {% if register.confirm_password.errors %}
+                        <span class="text-danger">
+                            {{ " | ".join(register.confirm_password.errors) }}
+                        </span>
+                        {% endif %}
                     </div>
                     <div class="field btn">
                         {{ register.submit(class="btn btn-success") }}
