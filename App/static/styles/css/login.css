@@ -112,7 +112,7 @@ input[type="radio"]{
   margin-top: 20px;
 }
 .form-inner form .field input{
-  height: 100%;
+  height: 50px;
   width: 100%;
   outline: none;
   padding-left: 15px;
@@ -124,7 +124,7 @@ input[type="radio"]{
 }
 .form-inner form .field input:focus{
   border-color: #1a75ff;
-  /* box-shadow: inset 0 0 3px #fb6aae; */
+  box-shadow:  0 0 3px rgb(75, 138, 255);
 }
 .form-inner form .field input::placeholder{
   color: #999;
@@ -149,45 +149,57 @@ form .field input:focus::placeholder{
 .form-inner form .signup-link a:hover{
   text-decoration: underline;
 }
-form .btn{
-  height: 100%;
-  width: 100%;
-  border-radius: 15px;
-  position: relative;
-  overflow: hidden;
-}
-form .btn .btn-layer {
+.form-inner form .field {
+    height: auto; /* Pastikan tinggi otomatis agar sesuai dengan konten */
+    width: 100%;
+    margin-top: 20px;
+    padding-left: 5px; /* Tambahkan padding kiri */
+    padding-right: 5px; /* Tambahkan padding kanan */
+    overflow: hidden; /* Hindari konten yang terpotong */
+    position: relative; /* Perbaikan untuk mengatur elemen di dalam field */
+  }
+  
+  .form-inner form .pass-link {
+    margin-top: 3px; /* Tambahkan jarak lebih besar dari input sebelumnya */
+    font-size: 14px;
+    display: block; /* Pastikan elemen tidak saling tumpang tindih */
+  }
+  
+  form .btn {
+    height: 10px; /* Tinggi yang konsisten */
+    width: 100%;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 0px; /* Tambahkan jarak dari elemen sebelumnya */
+  }
+  
+  form .btn .btn-layer {
     height: 100%;
     width: 300%;
     position: absolute;
-    top: 50%; /* Start in the vertical center */
+    top: 0; /* Pastikan layer berada di posisi yang benar */
     left: -100%;
-    transform: translateY(-50%); /* Offset by 50% of its height */
     background: -webkit-linear-gradient(right, #003366, #004080, #0059b3, #0073e6);
     border-radius: 15px;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease-in-out;
   }
   
-form .btn:hover .btn-layer{
-  left: 0;
+  form .btn input[type="submit"] {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: #0073e6; /* Warna default */
+    transition: background-color 0.3s ease;
   }
-form .btn input[type="submit"]{
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  position: relative;
-  background: none;
-  border: none;
-  color: #fff;
-  padding-left: 0;
-  border-radius: 15px;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-  /* background-color: red; */
-}
-
-.form-inner form .pass-link{
-    margin-top: 30px;
-}
-
+  
+  form .btn input[type="submit"]:hover {
+    background-color: #0059b3; /* Warna saat hover */
+  }
