@@ -22,8 +22,12 @@ def login():
 
             if user and user.check_password(password):
                 login_user(user)  # Log the user in
-                flash('Login successful!', 'success')
-                return redirect(url_for('general_bp.index'))  # Redirect to home page
+                # flash('Login successful!', 'success')
+                # Handle the "next" parameter
+                next_page = request.args.get('next')  # Get the 'next' parameter from the query string
+                if next_page:
+                    return redirect(next_page)  # Redirect to the original page
+                return redirect(url_for('dashboard_bp.index'))  # Redirect to home page
             else:
                 flash('Invalid username or password.', 'danger')
 
