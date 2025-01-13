@@ -1,11 +1,13 @@
 from flask import render_template, redirect, url_for, flash, request
 from App.models.user import User
 from App.forms.auth_forms import LoginForm, RegisterForm
-from flask_login import login_user
+from flask_login import login_user,current_user,logout_user
 from App.db import db
 
 def login():
     # Initialize both forms
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard_bp.index'))  # Redirect to a default page, e.g., the dashboard
     login_form = LoginForm(prefix='login')
     register_form = RegisterForm(prefix='register')
     
@@ -62,3 +64,11 @@ def login():
         request=request.form.to_dict(),
         stat='register-submit' in request.form
     )
+def logout():
+    if current_user.is_authenticated:
+        logout_user()
+        flash('You have been logged out.', 'success')
+        return redirect(url_for('auth_bp.login'))
+    else:
+        flash('You are not logged in.', 'warning')
+        return redirect(url_for('auth_bp.login'))
