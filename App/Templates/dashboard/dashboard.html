@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    Hi {{ current_user.username }}!
+    Hi {{ current_user.username}} having position {{ current_user.role.name}}!
     {% if current_user.is_authenticated %}
     <a href="{{ url_for('auth_bp.logout') }}">Logout</a>
 {% endif %}

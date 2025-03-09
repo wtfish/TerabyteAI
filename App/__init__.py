@@ -2,11 +2,11 @@ from flask import Flask
 # from App.routes.general_routes import general_bp
 from App.routes.auth_routes import auth_bp,dashboard_bp
 from App.config import Config
-from App.db import init_db
 from flask_login import LoginManager
 from App.models.user import User
 from flask import Flask, redirect, url_for, flash,request
 from flask_login import LoginManager
+from App.db import init_db
 
 def create_app():
     app = Flask(__name__)
@@ -35,6 +35,11 @@ def create_app():
     def seed_db():
         from App.scripts.seeder import seed_database
         seed_database(app)
+    @app.cli.command('make_db')
+    # Populate the database with some initial data
+    def make_db():
+        from App.scripts.make_db import make_db
+        make_db(app)
         
 
 
