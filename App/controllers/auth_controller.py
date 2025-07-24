@@ -15,7 +15,7 @@ def login():
     # Handle Login Form Submission
     if request.method == 'POST' :
 
-        if  'login-submit' in request.form and login_form.validate_on_submit():
+        if 'login-submit' in request.form and login_form.validate_on_submit():
             username = login_form.username.data
             password = login_form.password.data
 

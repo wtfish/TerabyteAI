@@ -44,4 +44,6 @@ def seed_database(app):
         print("User Table seeded successfully.")
 
 if __name__ == '__main__':
-    seed_database()
+    from App import create_app
+    app=create_app()
+    seed_database(app)
